@@ -286,7 +286,7 @@ router.put("/:id", examsCategoryController.updateExamCategory);
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  */
-router.delete('/delete/:id', examsCategoryController.deleteExamCategory)
+router.delete("/delete/:id", examsCategoryController.deleteExamCategory);
 /**
  * @swagger
  * /api/v1/exam-category/revive/{id}:
@@ -329,7 +329,7 @@ router.delete('/delete/:id', examsCategoryController.deleteExamCategory)
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  */
-router.put('/revive/:id', examsCategoryController.reviveExamCategory)
+router.put("/revive/:id", examsCategoryController.reviveExamCategory);
 
 /**
  * @swagger
@@ -373,7 +373,7 @@ router.put('/revive/:id', examsCategoryController.reviveExamCategory)
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  */
-router.put('/activate/:id', examsCategoryController.activeExamCategory)
+router.put("/activate/:id", examsCategoryController.activeExamCategory);
 
 /**
  * @swagger
@@ -417,8 +417,7 @@ router.put('/activate/:id', examsCategoryController.activeExamCategory)
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  */
-router.put('/inactivate/:id', examsCategoryController.inActiveExamCategory)
-
+router.put("/inactivate/:id", examsCategoryController.inActiveExamCategory);
 
 /**
  * @swagger
@@ -444,6 +443,94 @@ router.put('/inactivate/:id', examsCategoryController.inActiveExamCategory)
  */
 
 router.get("/dashboard", examsCategoryController.getDashboardExamCategories);
+
+/**
+ * @swagger
+ * /api/v1/exam-category/show-dashboard/{id}:
+ *   put:
+ *     summary: show exam category on dashboard
+ *     tags: [exam-category]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: Category Id
+ *     responses:
+ *       200:
+ *         description: Exam category show on dashboard successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: "Exam category show on dashboard successfully"
+ *       401:
+ *         description: Unauthorized
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ *       404:
+ *         description: Exam Category not found or unauthorized
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ */
+router.put("/show-dashboard/:id", examsCategoryController.showOnDashboardExamCategory);
+
+/**
+ * @swagger
+ * /api/v1/exam-category/hide-dashboard/{id}:
+ *   put:
+ *     summary: hide exam category from dashboard
+ *     tags: [exam-category]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: Category Id
+ *     responses:
+ *       200:
+ *         description: Exam category hide from dashboard successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: "Exam category hide from dashboard successfully"
+ *       401:
+ *         description: Unauthorized
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ *       404:
+ *         description: Exam Category not found or unauthorized
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ */
+router.put("/hide-dashboard/:id", examsCategoryController.hideFromDashboardExamCategory);
 
 /**
  * @swagger

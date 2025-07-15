@@ -115,6 +115,8 @@ router.get("/", (req, res) => {
                 inactivate: "PUT /exam-category/inactivate/:id",
                 getDashboardExamCategories: "GET /exam-category/dashboard",
                 getExamCategoryKeyValueList: "GET /exam-category/key-value-list",
+                showCategoryOnDashboard: "GET /exam-category/show-dashboard/:id",
+                hideCategoryOnDashboard: "GET /exam-category/hide-dashboard/:id",
             },
         }, 
     });

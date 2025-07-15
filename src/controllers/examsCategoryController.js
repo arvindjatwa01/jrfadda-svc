@@ -104,7 +104,7 @@ class WifiExamsController {
     // Get dashboard categories (no pagination)
     async getDashboardExamCategories(req, res, next) {
         try {
-            const whereClause = { dlb_is_Active: true, dlb_is_home: true };
+            const whereClause = { dlb_is_Active: true, dlb_is_home: true, dlb_is_deleted: false };
 
             const examsCategory = await ExamsCategory.findAll({
                 where: whereClause,
@@ -123,7 +123,7 @@ class WifiExamsController {
     // Get categories key value pair list (no pagination)
     async getCategoryKeyValueList(req, res, next) {
         try {
-            const whereClause = { dlb_is_Active: true, dlb_xm_parent_id: 0, dlb_offline_online: false };
+            const whereClause = { dlb_is_Active: true, dlb_is_deleted: false, dlb_xm_status: false, dlb_xm_parent_id: 0 };
 
             const examsCategory = await ExamsCategory.findAll({
                 where: whereClause,
@@ -344,6 +344,62 @@ class WifiExamsController {
             res.json({
                 success: true,
                 message: "Exam category deactive successfully",
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    // show category on dashboard
+    async showOnDashboardExamCategory(req, res, next) {
+        try {
+            const { id } = req.params;
+            // const userId = req.user.id;
+
+            const examCategory = await ExamsCategory.findOne({
+                where: { dlb_xm_id: id, dlb_is_Active: true, dlb_is_deleted: false },
+            });
+
+            if (!examCategory) {
+                return res.status(404).json({
+                    success: false,
+                    message: "Exam category not found or you do not have permission to show on dashboard it",
+                });
+            }
+
+            await examCategory.update({ dlb_is_home: true });
+
+            res.json({
+                success: true,
+                message: "Exam category show on dashboard successfully",
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    // hide category from dashboard
+    async hideFromDashboardExamCategory(req, res, next) {
+        try {
+            const { id } = req.params;
+            // const userId = req.user.id;
+
+            const examCategory = await ExamsCategory.findOne({
+                where: { dlb_xm_id: id, dlb_is_Active: true, dlb_is_deleted: false },
+            });
+
+            if (!examCategory) {
+                return res.status(404).json({
+                    success: false,
+                    message: "Exam category not found or you do not have permission to hide on dashboard it",
+                });
+            }
+
+            await examCategory.update({ dlb_is_home: false });
+
+            res.json({
+                success: true,
+                message: "Exam category hide from dashboard successfully",
             });
         } catch (error) {
             next(error);

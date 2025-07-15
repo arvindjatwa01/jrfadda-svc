@@ -98,10 +98,10 @@ const ExamsCategory = sequelize.define(
             type: DataTypes.INTEGER,
             allowNull: true,
         },
-        dlb_show_post: {
-            type: DataTypes.INTEGER,
-            allowNull: true,
-        },
+        // dlb_show_post: {
+        //     type: DataTypes.INTEGER,
+        //     allowNull: true,
+        // },
         dlb_xm_heading: {
             type: DataTypes.TEXT,
             allowNull: true,
@@ -126,10 +126,10 @@ const ExamsCategory = sequelize.define(
             type: DataTypes.TEXT,
             allowNull: true,
         },
-        dlb_show_side: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: false,
-        },
+        // dlb_show_side: {
+        //     type: DataTypes.BOOLEAN,
+        //     defaultValue: false,
+        // },
         dlb_is_home: {
             type: DataTypes.BOOLEAN,
             defaultValue: true,
