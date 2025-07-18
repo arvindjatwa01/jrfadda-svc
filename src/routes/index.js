@@ -1,8 +1,10 @@
-const express = require('express')
-const authRoutes = require('./authRoutes')
-const productRoutes = require('./productRoutes')
+const express = require("express");
+const authRoutes = require("./authRoutes");
+const productRoutes = require("./productRoutes");
+const examsCategoryRoutes = require("./examsCategoryRoutes");
+const categoryRoutes = require("./categoryRoutes");
 
-const router = express.Router()
+const router = express.Router();
 
 /**
  * @swagger
@@ -79,34 +81,64 @@ const router = express.Router()
  *                           type: string
  *                           example: "GET /products/user/my-products"
  */
+
 // Welcome message
-router.get('/', (req, res) => {
-  res.json({
-    success: true,
-    message: 'Welcome to the Node.js Express MySQL ORM API',
-    version: process.env.API_VERSION || 'v1',
-    documentation: '/api-docs',
-    endpoints: {
-      auth: {
-        register: 'POST /auth/register',
-        login: 'POST /auth/login',
-        profile: 'GET /auth/profile',
-        updateProfile: 'PUT /auth/profile'
-      },
-      products: {
-        getAll: 'GET /products',
-        getById: 'GET /products/:id',
-        create: 'POST /products',
-        update: 'PUT /products/:id',
-        delete: 'DELETE /products/:id',
-        getUserProducts: 'GET /products/user/my-products'
-      }
-    }
-  })
-})
+router.get("/", (req, res) => {
+    res.json({
+        success: true,
+        message: "Welcome to the Node.js Express MySQL ORM API",
+        version: process.env.API_VERSION || "v1",
+        documentation: "/api-docs",
+        endpoints: {
+            auth: {
+                register: "POST /auth/register",
+                login: "POST /auth/login",
+                profile: "GET /auth/profile",
+                updateProfile: "PUT /auth/profile",
+            },
+            products: {
+                getAll: "GET /products",
+                getById: "GET /products/:id",
+                create: "POST /products",
+                update: "PUT /products/:id",
+                delete: "DELETE /products/:id",
+                getUserProducts: "GET /products/user/my-products",
+            },
+            examsCategory: {
+                getAll: "GET /exam-category/list",
+                getAllDeleted: "GET /exam-category/deleted-list",
+                create: "POST /exam-category/save",
+                update: "PUT /exam-category/update/:id",
+                getById: "GET /exam-category/get/:id",
+                delete: "DELETE /exam-category/deleted/:id",
+                revive: "DELETE /exam-category/revive/:id",
+                activate: "PUT /exam-category/activate/:id",
+                inactivate: "PUT /exam-category/inactivate/:id",
+                getDashboardExamCategories: "GET /exam-category/dashboard",
+                getExamCategoryKeyValueList: "GET /exam-category/key-value-list",
+                showCategoryOnDashboard: "GET /exam-category/show-dashboard/:id",
+                hideCategoryOnDashboard: "GET /exam-category/hide-dashboard/:id",
+            },
+            category: {
+                getAll: "GET /category/list",
+                getAllDeleted: "GET /category/deleted-list",
+                create: "POST /category/save",
+                update: "PUT /category/update/:id",
+                getById: "GET /category/get/:id",
+                delete: "DELETE /category/deleted/:id",
+                revive: "DELETE /category/revive/:id",
+                activate: "PUT /category/activate/:id",
+                inactivate: "PUT /category/inactivate/:id",
+                getExamCategoryKeyValueList: "GET /category/key-value-list",
+            },
+        }, 
+    });
+});
 
 // Route handlers
-router.use('/auth', authRoutes)
-router.use('/products', productRoutes)
+router.use("/auth", authRoutes);
+router.use("/products", productRoutes);
+router.use("/exam-category", examsCategoryRoutes);
+router.use("/category", categoryRoutes);
 
-module.exports = router
+module.exports = router;
