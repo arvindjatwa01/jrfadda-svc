@@ -1,6 +1,7 @@
 const User = require("./User");
 const Product = require("./Product");
 const ExamsCategory = require("./ExamsCategory");
+const Category = require("./Category");
 
 // Define associations
 User.hasMany(Product, {
@@ -17,4 +18,5 @@ module.exports = {
     User,
     Product,
     ExamsCategory,
+    Category,
 };

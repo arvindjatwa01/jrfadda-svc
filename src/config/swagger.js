@@ -278,6 +278,152 @@ const options = {
                         },
                     },
                 },
+                Category: {
+                    type: "object",
+                    required: ["dlb_c_name"],
+                    properties: {
+                        dlb_c_id: {
+                            type: "integer",
+                            description: "category ID",
+                        },
+                        dlb_cls_id: {
+                            type: "integer",
+                            example: 0,
+                        },
+                        dlb_c_parent_id: {
+                            type: "integer",
+                            example: 0,
+                        },
+                        dlb_a_id: {
+                            type: "integer",
+                            example: 0,
+                        },
+                        dlb_c_name: {
+                            type: "string",
+                            minLength: 2,
+                            maxLength: 100,
+                            example: "string",
+                        },
+                        dlb_c_slug: {
+                            type: "string",
+                            example: "string",
+                        },
+                        dlb_c_content: {
+                            type: "string",
+                            example: "string",
+                        },
+                        dlb_c_meta_title: {
+                            type: "string",
+                            example: "string",
+                        },
+                        dlb_c_meta_description: {
+                            type: "string",
+                            example: "string",
+                        },
+                        dlb_c_meta_keywords: {
+                            type: "string",
+                            example: "string",
+                        },
+                        dlb_c_status: {
+                            type: "boolean",
+                            example: false,
+                        },
+                        dlb_order_id: {
+                            type: "integer",
+                            minimum: 0,
+                            example: 0,
+                        },
+                        dlb_c_image_og: {
+                            type: "string",
+                            example: "string",
+                        },
+                        bg_color: {
+                            type: "string",
+                            example: "#ffffff",
+                        },
+                        border_color: {
+                            type: "string",
+                            example: "#ffffff",
+                        },
+                        dlb_doubts_cat: {
+                            type: "boolean",
+                            example: false,
+                        },
+                        set_flag: {
+                            type: "boolean",
+                            example: false,
+                        },
+                        dlb_is_Active: {
+                            type: "boolean",
+                            example: false,
+                        },
+                        dlb_is_deleted: {
+                            type: "boolean",
+                            example: false,
+                        },
+                    },
+                },
+                CategoryInput: {
+                    type: "object",
+                    required: ["dlb_xm_name"],
+                    properties: {
+                        dlb_c_id: {
+                            type: "integer",
+                            description: "category ID",
+                        },
+                        dlb_cls_id: {
+                            type: "integer",
+                            example: 0,
+                        },
+                        dlb_c_parent_id: {
+                            type: "integer",
+                            example: 0,
+                        },
+                        dlb_a_id: {
+                            type: "integer",
+                            example: 0,
+                        },
+                        dlb_c_name: {
+                            type: "string",
+                            minLength: 2,
+                            maxLength: 100,
+                            example: "string",
+                        },
+                        dlb_c_slug: {
+                            type: "string",
+                            example: "string",
+                        },
+                        dlb_c_content: {
+                            type: "string",
+                            example: "string",
+                        },
+                        dlb_c_meta_title: {
+                            type: "string",
+                            example: "string",
+                        },
+                        dlb_c_meta_description: {
+                            type: "string",
+                            example: "string",
+                        },
+                        dlb_c_meta_keywords: {
+                            type: "string",
+                            example: "string",
+                        },
+                        dlb_c_status: {
+                            type: "boolean",
+                            example: false,
+                        },
+                        dlb_order_id: {
+                            type: "integer",
+                            minimum: 0,
+                            example: 0,
+                        },
+                        dlb_c_image_og: {
+                            type: "string",
+                            example: "string",
+                        },
+                    },
+                },
                 AuthResponse: {
                     type: "object",
                     properties: {
@@ -339,6 +485,51 @@ const options = {
                                     },
                                     message: {
                                         type: "string",
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+                PaginatedCategoryResponse: {
+                    type: "object",
+                    properties: {
+                        success: {
+                            type: "boolean",
+                            example: true,
+                        },
+                        responsePacket: {
+                            type: "object",
+                            properties: {
+                                data: {
+                                    type: "array",
+                                    items: {
+                                        $ref: "#/components/schemas/Category",
+                                    },
+                                },
+                                totalItems: {
+                                    type: "integer",
+                                    example: 50,
+                                },
+                                pagination: {
+                                    type: "object",
+                                    properties: {
+                                        currentPage: {
+                                            type: "integer",
+                                            example: 1,
+                                        },
+                                        totalPages: {
+                                            type: "integer",
+                                            example: 5,
+                                        },
+                                        totalItems: {
+                                            type: "integer",
+                                            example: 50,
+                                        },
+                                        itemsPerPage: {
+                                            type: "integer",
+                                            example: 10,
+                                        },
                                     },
                                 },
                             },

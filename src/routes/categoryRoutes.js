@@ -1,21 +1,21 @@
 const express = require("express");
-const examsCategoryController = require("../controllers/examsCategoryController");
+const categoryController = require("../controllers/categoryController");
 
 const router = express.Router();
 
 /**
  * @swagger
  * tags:
- *   name: exam-category
- *   description: Exam category management endpoints
+ *   name: category
+ *   description: Category management endpoints
  */
 
 /**
  * @swagger
- * /api/v1/exam-category/list:
+ * /api/v1/category/list:
  *   get:
- *     summary: Get all exam category with pagination and filtering
- *     tags: [exam-category]
+ *     summary: Get all category with pagination and filtering
+ *     tags: [category]
  *     parameters:
  *       - in: query
  *         name: page
@@ -36,19 +36,19 @@ const router = express.Router();
  *         name: category
  *         schema:
  *           type: string
- *         description: Filter by exam category
+ *         description: Filter by category
  *       - in: query
  *         name: search
  *         schema:
  *           type: string
- *         description: Search in exam category name and description
+ *         description: Search in category name and description
  *     responses:
  *       200:
- *         description: exam category retrieved successfully
+ *         description: category retrieved successfully
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/PaginatedExamCateofyResponse'
+ *               $ref: '#/components/schemas/PaginatedCategoryResponse'
  *       500:
  *         description: Internal server error
  *         content:
@@ -56,14 +56,14 @@ const router = express.Router();
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  */
-router.get("/list", examsCategoryController.getAllExamCategories);
+router.get("/list", categoryController.getAllCategories);
 
 /**
  * @swagger
- * /api/v1/exam-category/deleted-list:
+ * /api/v1/category/deleted-list:
  *   get:
- *     summary: Get all deletd exam category with pagination and filtering
- *     tags: [exam-category]
+ *     summary: Get all deletd category with pagination and filtering
+ *     tags: [category]
  *     parameters:
  *       - in: query
  *         name: page
@@ -84,19 +84,19 @@ router.get("/list", examsCategoryController.getAllExamCategories);
  *         name: category
  *         schema:
  *           type: string
- *         description: Filter by exam category
+ *         description: Filter by category
  *       - in: query
  *         name: search
  *         schema:
  *           type: string
- *         description: Search in deleted exam category name and description
+ *         description: Search in deleted category name and description
  *     responses:
  *       200:
- *         description: deleted exam category retrieved successfully
+ *         description: deleted category retrieved successfully
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/PaginatedExamCateofyResponse'
+ *               $ref: '#/components/schemas/PaginatedCategoryResponse'
  *       500:
  *         description: Internal server error
  *         content:
@@ -104,14 +104,14 @@ router.get("/list", examsCategoryController.getAllExamCategories);
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  */
-router.get("/deleted-list", examsCategoryController.getAllDeletedExamCategories);
+router.get("/deleted-list", categoryController.getAllDeletedCategories);
 
 /**
  * @swagger
- * /api/v1/exam-category/get/{id}:
+ * /api/v1/category/get/{id}:
  *   get:
  *     summary: Get a exam category by ID
- *     tags: [exam-category]
+ *     tags: [category]
  *     parameters:
  *       - in: path
  *         name: id
@@ -139,14 +139,14 @@ router.get("/deleted-list", examsCategoryController.getAllDeletedExamCategories)
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  */
-router.get("/:id(\\d+)", examsCategoryController.getExamCategoryById);
+router.get("/get/:id(\\d+)", categoryController.getCategoryById);
 
 /**
  * @swagger
- * /api/v1/exam-category/save:
+ * /api/v1/category/save:
  *   post:
  *     summary: Create a new category
- *     tags: [exam-category]
+ *     tags: [category]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -154,7 +154,7 @@ router.get("/:id(\\d+)", examsCategoryController.getExamCategoryById);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/ExamCategoryInput'
+ *             $ref: '#/components/schemas/CategoryInput'
  *     responses:
  *       201:
  *         description: Category created successfully
@@ -184,14 +184,14 @@ router.get("/:id(\\d+)", examsCategoryController.getExamCategoryById);
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  */
-router.post("/save", examsCategoryController.createExamCategory);
+router.post("/save", categoryController.createCategory);
 
 /**
  * @swagger
- * /api/v1/exam-category/update/{id}:
+ * /api/v1/category/update/{id}:
  *   put:
- *     summary: Update a exam category
- *     tags: [exam-category]
+ *     summary: Update a category
+ *     tags: [category]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -200,16 +200,16 @@ router.post("/save", examsCategoryController.createExamCategory);
  *         required: true
  *         schema:
  *           type: integer
- *         description: Exam Category ID
+ *         description: Category Id
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *                $ref: '#/components/schemas/ExamCategoryInput'
+ *                $ref: '#/components/schemas/CategoryInput'
  *     responses:
  *       200:
- *         description: Exam Category updated successfully
+ *         description: Category updated successfully
  *         content:
  *           application/json:
  *             schema:
@@ -220,7 +220,7 @@ router.post("/save", examsCategoryController.createExamCategory);
  *                   example: true
  *                 message:
  *                   type: string
- *                   example: "Exam Category updated successfully"
+ *                   example: "Category updated successfully"
  *                 data:
  *                       $ref: '#/components/schemas/ExamCategory'
  *       400:
@@ -236,20 +236,20 @@ router.post("/save", examsCategoryController.createExamCategory);
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  *       404:
- *         description: Exam Category not found or unauthorized
+ *         description: Category not found or unauthorized
  *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  */
-router.put("/update/:id", examsCategoryController.updateExamCategory);
+router.put("/update/:id", categoryController.updateCategory);
 
 /**
  * @swagger
- * /api/v1/exam-category/delete/{id}:
+ * /api/v1/category/delete/{id}:
  *   delete:
- *     summary: Delete a exam category (soft delete)
- *     tags: [exam-category]
+ *     summary: Delete a category (soft delete)
+ *     tags: [category]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -261,7 +261,7 @@ router.put("/update/:id", examsCategoryController.updateExamCategory);
  *         description: Category Id
  *     responses:
  *       200:
- *         description: Exam Category deleted successfully
+ *         description: Category deleted successfully
  *         content:
  *           application/json:
  *             schema:
@@ -272,7 +272,7 @@ router.put("/update/:id", examsCategoryController.updateExamCategory);
  *                   example: true
  *                 message:
  *                   type: string
- *                   example: "Exam Category deleted successfully"
+ *                   example: "Category deleted successfully"
  *       401:
  *         description: Unauthorized
  *         content:
@@ -280,63 +280,20 @@ router.put("/update/:id", examsCategoryController.updateExamCategory);
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  *       404:
- *         description: Exam Category not found or unauthorized
+ *         description: Category not found or unauthorized
  *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  */
-router.delete("/delete/:id", examsCategoryController.deleteExamCategory);
-/**
- * @swagger
- * /api/v1/exam-category/revive/{id}:
- *   put:
- *     summary: revive deletd exam category
- *     tags: [exam-category]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: Category Id
- *     responses:
- *       200:
- *         description: Exam Category revived successfully
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 success:
- *                   type: boolean
- *                   example: true
- *                 message:
- *                   type: string
- *                   example: "Exam Category revived successfully"
- *       401:
- *         description: Unauthorized
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ErrorResponse'
- *       404:
- *         description: Exam Category not found or unauthorized
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ErrorResponse'
- */
-router.put("/revive/:id", examsCategoryController.reviveExamCategory);
+router.delete("/delete/:id", categoryController.deleteCategory);
 
 /**
  * @swagger
- * /api/v1/exam-category/activate/{id}:
+ * /api/v1/category/revive/{id}:
  *   put:
- *     summary: active a exam category
- *     tags: [exam-category]
+ *     summary: revive deletd category
+ *     tags: [category]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -348,7 +305,7 @@ router.put("/revive/:id", examsCategoryController.reviveExamCategory);
  *         description: Category Id
  *     responses:
  *       200:
- *         description: Exam category activate successfully
+ *         description: Category revived successfully
  *         content:
  *           application/json:
  *             schema:
@@ -359,7 +316,7 @@ router.put("/revive/:id", examsCategoryController.reviveExamCategory);
  *                   example: true
  *                 message:
  *                   type: string
- *                   example: "Exam category activate successfully"
+ *                   example: "Category revived successfully"
  *       401:
  *         description: Unauthorized
  *         content:
@@ -367,20 +324,20 @@ router.put("/revive/:id", examsCategoryController.reviveExamCategory);
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  *       404:
- *         description: Exam Category not found or unauthorized
+ *         description: Category not found or unauthorized
  *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  */
-router.put("/activate/:id", examsCategoryController.activeExamCategory);
+router.put("/revive/:id", categoryController.reviveCategory);
 
 /**
  * @swagger
- * /api/v1/exam-category/inactivate/{id}:
+ * /api/v1/category/activate/{id}:
  *   put:
- *     summary: deactive a exam category
- *     tags: [exam-category]
+ *     summary: active category
+ *     tags: [category]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -392,7 +349,7 @@ router.put("/activate/:id", examsCategoryController.activeExamCategory);
  *         description: Category Id
  *     responses:
  *       200:
- *         description: Exam Category deactive successfully
+ *         description: Category activate successfully
  *         content:
  *           application/json:
  *             schema:
@@ -403,7 +360,7 @@ router.put("/activate/:id", examsCategoryController.activeExamCategory);
  *                   example: true
  *                 message:
  *                   type: string
- *                   example: "Exam Category deactive successfully"
+ *                   example: "Category activate successfully"
  *       401:
  *         description: Unauthorized
  *         content:
@@ -411,133 +368,64 @@ router.put("/activate/:id", examsCategoryController.activeExamCategory);
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  *       404:
- *         description: Exam Category not found or unauthorized
+ *         description: Category not found or unauthorized
  *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  */
-router.put("/inactivate/:id", examsCategoryController.inActiveExamCategory);
+router.put("/activate/:id", categoryController.activeCategory);
 
 /**
  * @swagger
- * /api/v1/exam-category/dashboard:
+ * /api/v1/category/inactivate/{id}:
+ *   put:
+ *     summary: deactive category
+ *     tags: [category]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: Category Id
+ *     responses:
+ *       200:
+ *         description: Category deactive successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: "Category deactive successfully"
+ *       401:
+ *         description: Unauthorized
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ *       404:
+ *         description: Category not found or unauthorized
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ */
+router.put("/inactivate/:id", categoryController.inActiveCategory);
+
+/**
+ * @swagger
+ * /api/v1/category/key-value-list:
  *   get:
- *     summary: Get exam category dashboard data
- *     tags: [exam-category]
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       200:
- *         description: Dashboard data retrieved successfully
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ExamsCategoryDashboardResponse'
- *       401:
- *         description: Unauthorized
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ErrorResponse'
- */
-
-router.get("/dashboard", examsCategoryController.getDashboardExamCategories);
-
-/**
- * @swagger
- * /api/v1/exam-category/show-dashboard/{id}:
- *   put:
- *     summary: show exam category on dashboard
- *     tags: [exam-category]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: Category Id
- *     responses:
- *       200:
- *         description: Exam category show on dashboard successfully
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 success:
- *                   type: boolean
- *                   example: true
- *                 message:
- *                   type: string
- *                   example: "Exam category show on dashboard successfully"
- *       401:
- *         description: Unauthorized
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ErrorResponse'
- *       404:
- *         description: Exam Category not found or unauthorized
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ErrorResponse'
- */
-router.put("/show-dashboard/:id", examsCategoryController.showOnDashboardExamCategory);
-
-/**
- * @swagger
- * /api/v1/exam-category/hide-dashboard/{id}:
- *   put:
- *     summary: hide exam category from dashboard
- *     tags: [exam-category]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: Category Id
- *     responses:
- *       200:
- *         description: Exam category hide from dashboard successfully
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 success:
- *                   type: boolean
- *                   example: true
- *                 message:
- *                   type: string
- *                   example: "Exam category hide from dashboard successfully"
- *       401:
- *         description: Unauthorized
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ErrorResponse'
- *       404:
- *         description: Exam Category not found or unauthorized
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ErrorResponse'
- */
-router.put("/hide-dashboard/:id", examsCategoryController.hideFromDashboardExamCategory);
-
-/**
- * @swagger
- * /api/v1/exam-category/key-value-list:
- *   get:
- *     summary: Get exam category key-value-list data
- *     tags: [exam-category]
+ *     summary: Get category key-value-list data
+ *     tags: [category]
  *     security:
  *       - bearerAuth: []
  *     responses:
@@ -554,7 +442,6 @@ router.put("/hide-dashboard/:id", examsCategoryController.hideFromDashboardExamC
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  */
-
-router.get("/key-value-list", examsCategoryController.getCategoryKeyValueList);
+router.get("/key-value-list", categoryController.getCategoryKeyValueList);
 
 module.exports = router;

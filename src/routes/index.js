@@ -2,6 +2,7 @@ const express = require("express");
 const authRoutes = require("./authRoutes");
 const productRoutes = require("./productRoutes");
 const examsCategoryRoutes = require("./examsCategoryRoutes");
+const categoryRoutes = require("./categoryRoutes");
 
 const router = express.Router();
 
@@ -106,9 +107,9 @@ router.get("/", (req, res) => {
             examsCategory: {
                 getAll: "GET /exam-category/list",
                 getAllDeleted: "GET /exam-category/deleted-list",
-                create: "POST /exam-category",
-                update: "PUT /exam-category/:id",
-                getById: "GET /exam-category/:id",
+                create: "POST /exam-category/save",
+                update: "PUT /exam-category/update/:id",
+                getById: "GET /exam-category/get/:id",
                 delete: "DELETE /exam-category/deleted/:id",
                 revive: "DELETE /exam-category/revive/:id",
                 activate: "PUT /exam-category/activate/:id",
@@ -118,6 +119,18 @@ router.get("/", (req, res) => {
                 showCategoryOnDashboard: "GET /exam-category/show-dashboard/:id",
                 hideCategoryOnDashboard: "GET /exam-category/hide-dashboard/:id",
             },
+            category: {
+                getAll: "GET /category/list",
+                getAllDeleted: "GET /category/deleted-list",
+                create: "POST /category/save",
+                update: "PUT /category/update/:id",
+                getById: "GET /category/get/:id",
+                delete: "DELETE /category/deleted/:id",
+                revive: "DELETE /category/revive/:id",
+                activate: "PUT /category/activate/:id",
+                inactivate: "PUT /category/inactivate/:id",
+                getExamCategoryKeyValueList: "GET /category/key-value-list",
+            },
         }, 
     });
 });
@@ -126,5 +139,6 @@ router.get("/", (req, res) => {
 router.use("/auth", authRoutes);
 router.use("/products", productRoutes);
 router.use("/exam-category", examsCategoryRoutes);
+router.use("/category", categoryRoutes);
 
 module.exports = router;
