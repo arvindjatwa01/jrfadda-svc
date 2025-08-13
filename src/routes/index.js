@@ -1,4 +1,5 @@
 const express = require("express");
+const adminRoutes = require("./adminRoutes");
 const authRoutes = require("./authRoutes");
 const productRoutes = require("./productRoutes");
 const examsCategoryRoutes = require("./examsCategoryRoutes");
@@ -96,6 +97,12 @@ router.get("/", (req, res) => {
                 profile: "GET /auth/profile",
                 updateProfile: "PUT /auth/profile",
             },
+            admin: {
+                register: "POST /admin/register",
+                login: "POST /admin/login",
+                profile: "GET /admin/profile",
+                updateProfile: "PUT /admin/profile",
+            },
             products: {
                 getAll: "GET /products",
                 getById: "GET /products/:id",
@@ -131,11 +138,12 @@ router.get("/", (req, res) => {
                 inactivate: "PUT /category/inactivate/:id",
                 getExamCategoryKeyValueList: "GET /category/key-value-list",
             },
-        }, 
+        },
     });
 });
 
 // Route handlers
+router.use("/admin", adminRoutes);
 router.use("/auth", authRoutes);
 router.use("/products", productRoutes);
 router.use("/exam-category", examsCategoryRoutes);

@@ -19,7 +19,7 @@ const options = {
         },
         servers: [
             {
-                url: `http://localhost:${process.env.PORT || 3000}`,
+                url: `http://localhost:${process.env.PORT || 3010}`,
                 description: "Development server",
             },
         ],
@@ -118,6 +118,85 @@ const options = {
                             example: "john.doe@example.com",
                         },
                         password: {
+                            type: "string",
+                            example: "Password123",
+                        },
+                    },
+                },
+                Admin: {
+                    type: "object",
+                    required: ["dlb_a_name", "dlb_a_email"],
+                    properties: {
+                        dlb_a_id: {
+                            type: "integer",
+                            description: "admin ID",
+                        },
+                        dlb_a_name: {
+                            type: "string",
+                            minLength: 2,
+                            maxLength: 50,
+                            description: "admin name",
+                        },
+                        dlb_a_email: {
+                            type: "string",
+                            format: "email",
+                            description: "admin email address",
+                        },
+                        isActive: {
+                            type: "boolean",
+                            description: "Whether the admin is active",
+                        },
+                        lastLoginAt: {
+                            type: "string",
+                            format: "date-time",
+                            description: "Last login timestamp",
+                        },
+                        createdAt: {
+                            type: "string",
+                            format: "date-time",
+                            description: "Account creation timestamp",
+                        },
+                        updatedAt: {
+                            type: "string",
+                            format: "date-time",
+                            description: "Account last update timestamp",
+                        },
+                    },
+                },
+                AdminRegistration: {
+                    type: "object",
+                    required: ["dlb_a_name", "dlb_a_email", "dlb_a_password"],
+                    properties: {
+                        dlb_a_name: {
+                            type: "string",
+                            minLength: 2,
+                            maxLength: 50,
+                            example: "Admin",
+                        },
+                        dlb_a_email: {
+                            type: "string",
+                            format: "email",
+                            example: "abc@example.com",
+                        },
+                        dlb_a_password: {
+                            type: "string",
+                            minLength: 6,
+                            pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)",
+                            example: "Password123",
+                            description: "Password must contain at least one uppercase letter, one lowercase letter, and one number",
+                        },
+                    },
+                },
+                AdminLogin: {
+                    type: "object",
+                    required: ["dlb_a_email", "dlb_a_password"],
+                    properties: {
+                        dlb_a_email: {
+                            type: "string",
+                            format: "email",
+                            example: "abc@example.com",
+                        },
+                        dlb_a_password: {
                             type: "string",
                             example: "Password123",
                         },

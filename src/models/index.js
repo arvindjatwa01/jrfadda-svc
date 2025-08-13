@@ -1,4 +1,5 @@
 const User = require("./User");
+const Admin = require("./Admin");
 const Product = require("./Product");
 const ExamsCategory = require("./ExamsCategory");
 const Category = require("./Category");
@@ -15,6 +16,7 @@ Product.belongsTo(User, {
 });
 
 module.exports = {
+    Admin,
     User,
     Product,
     ExamsCategory,

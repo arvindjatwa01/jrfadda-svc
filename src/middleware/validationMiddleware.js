@@ -12,6 +12,24 @@ const handleValidationErrors = (req, res, next) => {
     next();
 };
 
+const adminValidation = {
+    register: [
+        body("dlb_a_name").trim().isLength({ min: 2, max: 50 }).withMessage("Name must be between 2 and 50 characters"),
+        body("dlb_a_email").isEmail().normalizeEmail().withMessage("Please provide a valid email"),
+        body("dlb_a_password")
+            .isLength({ min: 6 })
+            .withMessage("Password must be at least 6 characters long")
+            .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/)
+            .withMessage("Password must contain at least one uppercase letter, one lowercase letter, and one number"),
+        handleValidationErrors,
+    ],
+    login: [
+        body("dlb_a_email").isEmail().normalizeEmail().withMessage("Please provide a valid email"),
+        body("dlb_a_password").notEmpty().withMessage("Password is required"),
+        handleValidationErrors,
+    ],
+};
+
 const userValidation = {
     register: [
         body("firstName").trim().isLength({ min: 2, max: 50 }).withMessage("First name must be between 2 and 50 characters"),
@@ -51,4 +69,5 @@ const productValidation = {
 module.exports = {
     userValidation,
     productValidation,
+    adminValidation,
 };

@@ -11,7 +11,11 @@ const { errorHandler, notFound } = require('./middleware/errorMiddleware')
 const { swaggerUi, specs } = require('./config/swagger')
 
 const app = express()
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3010
+
+console.log('DB_USER:', process.env.DB_USER); // Should print 'root'
+console.log('DB_PASSWORD:', process.env.DB_PASSWORD); // Should print '' if no password is set
+console.log('DB_NAME:', process.env.DB_NAME);
 
 // Security middleware
 app.use(helmet())
