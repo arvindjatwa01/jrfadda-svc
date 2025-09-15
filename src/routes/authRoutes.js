@@ -1,9 +1,9 @@
-const express = require('express')
-const authController = require('../controllers/authController')
-const authMiddleware = require('../middleware/authMiddleware')
-const { userValidation } = require('../middleware/validationMiddleware')
+const express = require("express");
+const authController = require("../controllers/authController");
+const authMiddleware = require("../middleware/authMiddleware");
+const { userValidation } = require("../middleware/validationMiddleware");
 
-const router = express.Router()
+const router = express.Router();
 
 /**
  * @swagger
@@ -44,7 +44,7 @@ const router = express.Router()
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  */
-router.post('/register', userValidation.register, authController.register)
+router.post("/register", userValidation.register, authController.register);
 
 /**
  * @swagger
@@ -72,7 +72,7 @@ router.post('/register', userValidation.register, authController.register)
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  */
-router.post('/login', userValidation.login, authController.login)
+router.post("/login", userValidation.login, authController.login);
 
 /**
  * @swagger
@@ -105,7 +105,7 @@ router.post('/login', userValidation.login, authController.login)
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  */
-router.get('/profile', authMiddleware, authController.getProfile)
+router.get("/profile", authMiddleware, authController.getProfile);
 
 /**
  * @swagger
@@ -158,6 +158,90 @@ router.get('/profile', authMiddleware, authController.getProfile)
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  */
-router.put('/profile', authMiddleware, authController.updateProfile)
+router.put("/profile", authMiddleware, authController.updateProfile);
 
-module.exports = router
+/**
+ * @swagger
+ * /api/v1/auth/sendOtp:
+ *   post:
+ *     summary: Send OTP to a user's mobile number
+ *     tags: [Authentication]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               mobile:
+ *                 type: string
+ *                 example: "9876543210"
+ *                 description: "Mobile number to send OTP to"
+ *     responses:
+ *       200:
+ *         description: OTP sent successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: "OTP sent successfully"
+ *       400:
+ *         description: Invalid request or missing mobile number
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ */
+router.post("/sendOtp", authController.sendOtp);
+
+/**
+ * @swagger
+ * /api/v1/auth/verifyOtp:
+ *   post:
+ *     summary: Verify the OTP sent to the user's mobile number
+ *     tags: [Authentication]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               mobile:
+ *                 type: string
+ *                 example: "9876543210"
+ *                 description: "Mobile number the OTP was sent to"
+ *               otp:
+ *                 type: string
+ *                 example: "123456"
+ *                 description: "OTP received by the user"
+ *     responses:
+ *       200:
+ *         description: OTP verified successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: "OTP verified successfully"
+ *       400:
+ *         description: Invalid OTP or mobile number
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ */
+router.post("/verifyOtp", authController.verifyOtp);
+
+module.exports = router;

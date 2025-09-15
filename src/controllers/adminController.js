@@ -76,8 +76,15 @@ class AdminController {
                 success: true,
                 message: "Login successful",
                 data: {
-                    admin,
-                    token,
+                    // ...admin.dataValues,
+                    name: admin.dataValues.dlb_a_name,
+                    phoneNumber: admin.dataValues.dlb_a_phone,
+                    email: admin.dataValues.dlb_a_email,
+                    isSuperAdmin: admin.dataValues.dlb_super_admin,
+                    profileImage: admin.dataValues.dlb_a_image,
+                    thumbnail: admin.dataValues.dlb_a_image_thumb,
+                    lastLoginAt: admin.dataValues.lastLoginAt,
+                    accessToken: token,
                 },
                 errorCode: 0,
             });

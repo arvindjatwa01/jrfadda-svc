@@ -4,6 +4,7 @@ const authRoutes = require("./authRoutes");
 const productRoutes = require("./productRoutes");
 const examsCategoryRoutes = require("./examsCategoryRoutes");
 const categoryRoutes = require("./categoryRoutes");
+const uploadRoutes = require("./uploadRoutes");
 
 const router = express.Router();
 
@@ -148,5 +149,6 @@ router.use("/auth", authRoutes);
 router.use("/products", productRoutes);
 router.use("/exam-category", examsCategoryRoutes);
 router.use("/category", categoryRoutes);
+router.use("/upload", uploadRoutes);
 
 module.exports = router;

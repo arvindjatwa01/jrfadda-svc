@@ -90,6 +90,14 @@ const Category = sequelize.define(
             type: DataTypes.BOOLEAN,
             defaultValue: false,
         },
+        dlb_isActive: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: true,
+        },
+        dlb_is_deleted: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false,
+        },
     },
     {
         tableName: "wifi_categories",

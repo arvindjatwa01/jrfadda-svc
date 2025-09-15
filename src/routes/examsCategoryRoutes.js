@@ -13,7 +13,7 @@ const router = express.Router();
 /**
  * @swagger
  * /api/v1/exam-category/list:
- *   get:
+ *   post:
  *     summary: Get all exam category with pagination and filtering
  *     tags: [exam-category]
  *     parameters:
@@ -56,12 +56,12 @@ const router = express.Router();
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  */
-router.get("/list", examsCategoryController.getAllExamCategories);
+router.post("/list", examsCategoryController.getAllExamCategories);
 
 /**
  * @swagger
  * /api/v1/exam-category/deleted-list:
- *   get:
+ *   post:
  *     summary: Get all deletd exam category with pagination and filtering
  *     tags: [exam-category]
  *     parameters:
@@ -104,7 +104,7 @@ router.get("/list", examsCategoryController.getAllExamCategories);
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  */
-router.get("/deleted-list", examsCategoryController.getAllDeletedExamCategories);
+router.post("/deleted-list", examsCategoryController.getAllDeletedExamCategories);
 
 /**
  * @swagger
@@ -535,7 +535,7 @@ router.put("/hide-dashboard/:id", examsCategoryController.hideFromDashboardExamC
 /**
  * @swagger
  * /api/v1/exam-category/key-value-list:
- *   get:
+ *   post:
  *     summary: Get exam category key-value-list data
  *     tags: [exam-category]
  *     security:
@@ -555,6 +555,6 @@ router.put("/hide-dashboard/:id", examsCategoryController.hideFromDashboardExamC
  *               $ref: '#/components/schemas/ErrorResponse'
  */
 
-router.get("/key-value-list", examsCategoryController.getCategoryKeyValueList);
+router.post("/key-value-list", examsCategoryController.getCategoryKeyValueList);
 
 module.exports = router;

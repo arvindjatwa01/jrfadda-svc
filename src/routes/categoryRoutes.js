@@ -13,7 +13,7 @@ const router = express.Router();
 /**
  * @swagger
  * /api/v1/category/list:
- *   get:
+ *   post:
  *     summary: Get all category with pagination and filtering
  *     tags: [category]
  *     parameters:
@@ -56,12 +56,12 @@ const router = express.Router();
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  */
-router.get("/list", categoryController.getAllCategories);
+router.post("/list", categoryController.getAllCategories);
 
 /**
  * @swagger
  * /api/v1/category/deleted-list:
- *   get:
+ *   post:
  *     summary: Get all deletd category with pagination and filtering
  *     tags: [category]
  *     parameters:
@@ -104,7 +104,7 @@ router.get("/list", categoryController.getAllCategories);
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  */
-router.get("/deleted-list", categoryController.getAllDeletedCategories);
+router.post("/deleted-list", categoryController.getAllDeletedCategories);
 
 /**
  * @swagger
@@ -423,7 +423,7 @@ router.put("/inactivate/:id", categoryController.inActiveCategory);
 /**
  * @swagger
  * /api/v1/category/key-value-list:
- *   get:
+ *   post:
  *     summary: Get category key-value-list data
  *     tags: [category]
  *     security:
@@ -442,6 +442,6 @@ router.put("/inactivate/:id", categoryController.inActiveCategory);
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  */
-router.get("/key-value-list", categoryController.getCategoryKeyValueList);
+router.post("/key-value-list", categoryController.getCategoryKeyValueList);
 
 module.exports = router;
